@@ -11,9 +11,8 @@ from Bio.Alphabet import IUPAC
 def to_fasta(row):
     s = SeqRecord(Seq(row['Amino Acid Sequence'].replace('\n',''),
                                     IUPAC.protein))
-    s.id = '%s' % row['Number']
-    s.description = '%s|%s' % (row['Name'],
-                        row['Oligomerization State'])
+    s.id = '%s:%s' % (row['Number'], row['Oligomerization State'])
+    s.description = '%s' % row['Name']
 
     SeqIO.write(s, sys.stdout, 'fasta')
 
